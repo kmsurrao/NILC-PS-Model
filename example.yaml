@@ -1,0 +1,57 @@
+#######################################################################
+#######################################################################
+
+# number of n-point function calculations to run in parallel
+# defaults to 1 (no parallelization) if not provided 
+num_parallel: 16
+
+# nside of NILC maps
+nside: 32 
+
+# ellmax for power spectra
+ellmax: 20
+
+# maximum ell to loop over
+ell_sum_max: 20 
+
+# amplification factor for tSZ map
+tSZ_amp: 1000. 
+
+# noise level in uK arcmin
+noise: 30000 
+
+# frequencies for maps, in GHz
+freqs: [90., 150.] 
+
+# number of needlet filter scales
+Nscales: 3 
+
+# array of FWHM used for constrution of Gaussians 
+# (needlet filters are differences of two Gaussians). 
+# FWHM need to be in strictly decreasing order.
+GN_FWHM_arcmin: [300., 120.] 
+
+#######################################################################
+#######################################################################
+
+# whether to have intermediate printing
+verbose: True 
+
+# File for tSZ map in Kelvin
+tsz_map_file: '/scratch/09334/ksurrao/NILC/inputs/halosky_maps/tsz_00000.fits' 
+
+# File for CMB map in Kelvin, lensed_alm is in uK
+cmb_map_file: '/scratch/09334/ksurrao/NILC/inputs/cmb_lensed_nside1024_K.fits' 
+
+# Path to pyilc repository
+pyilc_path: '/work2/09334/ksurrao/stampede2/GitHub/pyilc' 
+
+# File containing wigner-3j symbols with zero m values, indexed as wigner3j[l1,l2,l3]. 
+# If this input is not provided, wigner-3j symbols will be computed.
+wigner_file: '/scratch/09334/ksurrao/NILC/inputs/wigner3j_ellmax1000.p' 
+
+# Path to folder to store outputs
+output_dir: '/scratch/09334/ksurrao/NILC/outputs_analytic' 
+
+#######################################################################
+#######################################################################
