@@ -8,7 +8,7 @@ Computation of power spectra of NILC component-separated maps, using n-point fun
  - Modify example.yaml or create a similar yaml files, modifying paths to the above requirements and any additional specifications.
 
 ## Running      
-```python main.py --config=example.yaml```  
+```python main.py --config=example_yaml_files/[FILENAME].yaml```  
 
 ## Recommendations
 It is recommended (though not required) to comment out calls to healpy mollview in pyilc/pyilc/wavelets.py.

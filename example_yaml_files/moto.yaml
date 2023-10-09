@@ -1,0 +1,57 @@
+#######################################################################
+#######################################################################
+
+# number of n-point function calculations to run in parallel
+# defaults to 1 (no parallelization) if not provided 
+num_parallel: 16
+
+# nside of NILC maps
+nside: 32 
+
+# ellmax for power spectra
+ellmax: 20
+
+# maximum ell to loop over
+ell_sum_max: 20 
+
+# amplification factor for tSZ map
+tSZ_amp: 1000. 
+
+# noise level in uK arcmin
+noise: 30000 
+
+# frequencies for maps, in GHz
+freqs: [90., 150.] 
+
+# number of needlet filter scales
+Nscales: 3 
+
+# array of FWHM used for constrution of Gaussians 
+# (needlet filters are differences of two Gaussians). 
+# FWHM need to be in strictly decreasing order.
+GN_FWHM_arcmin: [300., 120.] 
+
+#######################################################################
+#######################################################################
+
+# whether to have intermediate printing
+verbose: True 
+
+# File for tSZ map in Kelvin
+tsz_map_file: '/moto/hill/users/kms2320/NILC_outputs/halosky_maps'
+
+# File for CMB map in Kelvin, lensed_alm is in uK
+cmb_map_file: '/moto/hill/users/kms2320/websky_maps/cmb_lensed_nside1024_K.fits'
+
+# Path to pyilc repository
+pyilc_path: '/moto/hill/users/kms2320/repositories/pyilc'
+
+# File containing wigner-3j symbols with zero m values, indexed as wigner3j[l1,l2,l3]. 
+# If this input is not provided, wigner-3j symbols will be computed.
+wigner_file: '/moto/hill/users/kms2320/NILC_outputs/wigner3j_ellmax1000.p'
+
+# Path to folder to store outputs
+output_dir: '/moto/hill/users/kms2320/NILC_outputs/'
+
+#######################################################################
+#######################################################################
