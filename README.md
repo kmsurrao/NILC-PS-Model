@@ -5,7 +5,7 @@ Computation of power spectra of NILC component-separated maps, using n-point fun
  - Requires a clone of the pyilc repository (https://github.com/jcolinhill/pyilc). 
  - Requires a CMB map .fits file in Kelvin (lensed alm can be downloaded from WebSky at https://mocks.cita.utoronto.ca/data/websky/v0.0/). 
  - Requires a tSZ map in .fits file format in units of Kelvin, which can be generated via halosky (https://github.com/marcelo-alvarez/halosky) or downloaded from Websky.
- - Modify example.yaml or create a similar yaml files, modifying paths to the above requirements and any additional specifications.
+ - Modify one of the example yaml files or create a similar one, modifying paths to the above requirements and any additional specifications.
 
 ## Running      
 ```python main.py --config=example_yaml_files/[FILENAME].yaml```  
