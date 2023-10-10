@@ -1,5 +1,4 @@
 import os
-import subprocess
 import pickle
 import time
 import argparse
@@ -35,7 +34,7 @@ def get_data_vectors(inp, env):
     CC, T, N1, N2, CMB_map, tSZ_map, noise1_map, noise2_map = generate_freq_maps(inp, band_limit=True, same_noise=False)
     
     #get NILC weight maps for preserved component CMB and preserved component tSZ using pyilc
-    setup_pyilc(inp, env)
+    setup_pyilc(inp, env, suppress_printing=False)
 
     #load weight maps
     CMB_wt_maps, tSZ_wt_maps = load_wt_maps(inp, band_limit=True)
@@ -44,57 +43,49 @@ def get_data_vectors(inp, env):
     Clzz = get_Clzz(CC, T)
     if inp.verbose:
         print('calculated component map spectra', flush=True)
-    if inp.save_files:
-        pickle.dump(Clzz, open(f'{inp.output_dir}/n_point_funcs/Clzz.p', 'wb'))
+    pickle.dump(Clzz, open(f'{inp.output_dir}/n_point_funcs/Clzz.p', 'wb'))
 
     #get power spectra of weight maps, index as Clw1w2[p,q,n,m,i,j,l]
     Clw1w2 = get_Clw1w2(inp, CMB_wt_maps, tSZ_wt_maps)
     if inp.verbose:
-        print('calculated weight map spectra for', flush=True)
-    if inp.save_files:
-        pickle.dump(Clw1w2, open(f'{inp.output_dir}/n_point_funcs/Clw1w2.p', 'wb'))
+        print('calculated weight map spectra', flush=True)
+    pickle.dump(Clw1w2, open(f'{inp.output_dir}/n_point_funcs/Clw1w2.p', 'wb'))
 
     #get cross-spectra of component maps and weight maps, index as Clzw[z,p,n,i,l]
     Clzw = get_Clzw(inp, CMB_wt_maps, tSZ_wt_maps, CMB_map, tSZ_map)
     if inp.verbose:
         print('calculated component and weight map cross-spectra', flush=True)
-    if inp.save_files:
-        pickle.dump(Clzw, open(f'{inp.output_dir}/n_point_funcs/Clzw.p', 'wb'))
+    pickle.dump(Clzw, open(f'{inp.output_dir}/n_point_funcs/Clzw.p', 'wb'))
         
     #get means of weight maps, index as w[p,n,i]
     w = get_w(inp, CMB_wt_maps, tSZ_wt_maps)
     if inp.verbose:
         print('calculated weight map means', flush=True)
-    if inp.save_files:
-        pickle.dump(w, open(f'{inp.output_dir}/n_point_funcs/w.p', 'wb'))
+    pickle.dump(w, open(f'{inp.output_dir}/n_point_funcs/w.p', 'wb'))
 
     #get means of component maps, index as a[z]
     a = get_a(CMB_map, tSZ_map)
     if inp.verbose:
         print('calculated component map means', flush=True)
-    if inp.save_files:
-        pickle.dump(a, open(f'{inp.output_dir}/n_point_funcs/a.p', 'wb'))
+    pickle.dump(a, open(f'{inp.output_dir}/n_point_funcs/a.p', 'wb'))
         
     #get bispectrum for two factors of map and one factor of weight map, index as bispectrum_zzw[z,q,m,j,l1,l2,l3]
     bispectrum_zzw = get_bispectrum_zzw(inp, CMB_map, tSZ_map, CMB_wt_maps, tSZ_wt_maps)
     if inp.verbose:
         print('calculated bispectra for map, map, weight map', flush=True)
-    if inp.save_files:
-        pickle.dump(bispectrum_zzw, open(f'{inp.output_dir}/n_point_funcs/bispectrum_zzw.p', 'wb'))
+    pickle.dump(bispectrum_zzw, open(f'{inp.output_dir}/n_point_funcs/bispectrum_zzw.p', 'wb'))
     
     # get bispectrum for two weight maps and one factor of map, index as bispectrum_wzw[p,n,i,z,q,m,j,l1,l2,l3]
     bispectrum_wzw = get_bispectrum_wzw(inp, CMB_map, tSZ_map, CMB_wt_maps, tSZ_wt_maps)
     if inp.verbose:
         print('calculated bispectra for weight map, map, weight map', flush=True)
-    if inp.save_files:
-        pickle.dump(bispectrum_wzw, open(f'{inp.output_dir}/n_point_funcs/bispectrum_wzw.p', 'wb'))
+    pickle.dump(bispectrum_wzw, open(f'{inp.output_dir}/n_point_funcs/bispectrum_wzw.p', 'wb'))
     
     # get unnormalized trispectrum estimator rho, index as rho[z,p,n,i,q,m,j,l2,l4,l3,l5,l1]
     Rho = get_rho(inp, CMB_map, tSZ_map, CMB_wt_maps, tSZ_wt_maps)
     if inp.verbose:
         print('calculated unnormalized trispectrum estimator rho', flush=True)
-    if inp.save_files:
-        pickle.dump(Rho, open(f'{inp.output_dir}/n_point_funcs/Rho.p', 'wb'))
+    pickle.dump(Rho, open(f'{inp.output_dir}/n_point_funcs/Rho.p', 'wb'))
         
     #get needlet filters and spectral responses
     h = GaussianNeedlets(inp)[1]
@@ -171,7 +162,7 @@ def main():
     my_env = os.environ.copy()
 
     #get wigner 3j symbols
-    if inp.wigner_file != '':
+    if inp.wigner_file is not None:
         inp.wigner3j = pickle.load(open(inp.wigner_file, 'rb'))[:inp.ell_sum_max+1, :inp.ell_sum_max+1, :inp.ell_sum_max+1]
     else:
         inp.wigner3j = compute_3j(inp.ell_sum_max)
@@ -179,7 +170,7 @@ def main():
     #set up output directory
     setup_output_dir(inp, my_env)
     
-    Clpq, Clpq_direct = get_data_vectors(0, inp, my_env)
+    Clpq, Clpq_direct = get_data_vectors(inp, my_env)
 
     print('PROGRAM FINISHED RUNNING')
     print("--- %s seconds ---" % (time.time() - start_time), flush=True)

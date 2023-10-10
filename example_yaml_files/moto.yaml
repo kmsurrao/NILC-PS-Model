@@ -29,7 +29,7 @@ Nscales: 3
 # array of FWHM used for constrution of Gaussians 
 # (needlet filters are differences of two Gaussians). 
 # FWHM need to be in strictly decreasing order.
-GN_FWHM_arcmin: [300., 120.] 
+GN_FWHM_arcmin: [1000., 800.] 
 
 #######################################################################
 #######################################################################
@@ -38,7 +38,7 @@ GN_FWHM_arcmin: [300., 120.]
 verbose: True 
 
 # File for tSZ map in Kelvin
-tsz_map_file: '/moto/hill/users/kms2320/NILC_outputs/halosky_maps'
+tsz_map_file: '/moto/hill/users/kms2320/NILC_outputs/halosky_maps/tsz_00000.fits'
 
 # File for CMB map in Kelvin, lensed_alm is in uK
 cmb_map_file: '/moto/hill/users/kms2320/websky_maps/cmb_lensed_nside1024_K.fits'
@@ -51,7 +51,7 @@ pyilc_path: '/moto/hill/users/kms2320/repositories/pyilc'
 wigner_file: '/moto/hill/users/kms2320/NILC_outputs/wigner3j_ellmax1000.p'
 
 # Path to folder to store outputs
-output_dir: '/moto/hill/users/kms2320/NILC_outputs/'
+output_dir: '/moto/hill/users/kms2320/NILC_outputs'
 
 #######################################################################
 #######################################################################

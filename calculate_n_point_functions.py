@@ -13,9 +13,9 @@ def get_cross_spectrum_two_maps(map1, map2, ellmax):
     '''
     ARGUMENTS
     ---------
-    map1:
-    map2:
-    ellmax:
+    map1: 1D numpy array in healpix format containing first map
+    map2: 1D numpy array in healpix format containing second map
+    ellmax: int, maximum ell for which to compute spectrum
 
     RETURNS
     -------

@@ -59,6 +59,13 @@ class Info(object):
         assert type(self.tsz_map_file) is str, "TypeError: tsz_map_file must be str"
         assert os.path.isfile(self.tsz_map_file), "tSZ map file does not exist"
 
+        if 'wigner_file' in p:
+            self.wigner_file = p['wigner_file']
+            assert type(self.wigner_file) is str, "TypeError: wigner_file must be str"
+            assert os.path.isfile(self.wigner_file), "wigner_file does not exist"
+        else:
+            self.wigner_file = None
+
         self.output_dir = p['output_dir']
         assert type(self.output_dir) is str, "TypeError: output_dir must be str"
         self.verbose = p['verbose']

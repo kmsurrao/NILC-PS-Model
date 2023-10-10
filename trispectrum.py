@@ -17,7 +17,7 @@ def Tl_numerator(inp, data1, data2, data3, data4,
     We also drop the L=0 pieces, since these would require non-mean-zero correlators.
     If lmin > 0, we don't calculate any pieces with l<lmin; the output array still contains these pieces, just filled with zeros.
     
-    PARAMETERS
+    ARGUMENTS
     ----------
     inp: Info() object, contains information about input parameters
     data{i}: 1D numpy array, ith map input to trispectrum
@@ -150,7 +150,9 @@ def Tl_numerator(inp, data1, data2, data3, data4,
 def rho(inp, a_map, w1_map, w2_map, remove_two_point=True):
     '''
     Compute trispectrum without normalization
-    PARAMETERS
+    
+    ARGUMENTS
+    ---------
     inp: Info() object, contains information about input parameters
     a_map: 1D numpy array, map of signal with average subtracted
     w1_map: 1D numpy array, map of first weight map with average subtracted
@@ -158,6 +160,7 @@ def rho(inp, a_map, w1_map, w2_map, remove_two_point=True):
     remove_two_point: Bool, whether to subtract two-point disconnected pieces
     
     RETURNS
+    -------
     tl_out: 5D numpy array, indexed as tl_out[l2,l4,l3,l5,l1]
 
     '''
