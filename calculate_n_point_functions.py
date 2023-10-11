@@ -164,7 +164,6 @@ def get_bispectrum_zzw(inp, CMB_map, tSZ_map, CMB_wt_maps, tSZ_wt_maps):
     comp_maps = [CMB_map, tSZ_map]
     wt_maps = [CMB_wt_maps, tSZ_wt_maps]
     args = []
-    bispectra = np.zeros((N_comps, N_preserved_comps, inp.Nscales, Nfreqs, inp.ellmax+1, inp.ell_sum_max+1, inp.ell_sum_max+1), dtype=np.float32)
     
     for z in range(N_comps):
         for q in range(N_preserved_comps):
@@ -177,13 +176,10 @@ def get_bispectrum_zzw(inp, CMB_map, tSZ_map, CMB_wt_maps, tSZ_wt_maps):
     results = pool.starmap(Bispectrum, args)
     pool.close()
 
-    ct = 0
-    for z in range(N_comps):
-        for q in range(N_preserved_comps):
-            for m in range(inp.Nscales):
-                for j in range(Nfreqs):
-                    bispectra[z,q,m,j] = results[ct]
-                    ct += 1
+    results = np.array(results, dtype=np.float32)
+    bispectra = np.reshape(results, (N_comps, N_preserved_comps, inp.Nscales, Nfreqs, \
+                                     inp.ellmax+1, inp.ell_sum_max+1, inp.ell_sum_max+1))
+
     return bispectra
 
 def get_bispectrum_wzw(inp, CMB_map, tSZ_map, CMB_wt_maps, tSZ_wt_maps):
@@ -206,7 +202,6 @@ def get_bispectrum_wzw(inp, CMB_map, tSZ_map, CMB_wt_maps, tSZ_wt_maps):
     comp_maps = [CMB_map, tSZ_map]
     wt_maps = [CMB_wt_maps, tSZ_wt_maps]
     args = []
-    bispectra = np.zeros((N_preserved_comps, inp.Nscales, Nfreqs, N_comps, N_preserved_comps, inp.Nscales, Nfreqs, inp.ellmax+1, inp.ell_sum_max+1, inp.ell_sum_max+1), dtype=np.float32)
 
     for p in range(N_preserved_comps):
         for n in range(inp.Nscales):
@@ -222,16 +217,10 @@ def get_bispectrum_wzw(inp, CMB_map, tSZ_map, CMB_wt_maps, tSZ_wt_maps):
     results = pool.starmap(Bispectrum, args)
     pool.close()
 
-    ct = 0
-    for p in range(N_preserved_comps):
-        for n in range(inp.Nscales):
-            for i in range(Nfreqs):
-                for z in range(N_comps):
-                    for q in range(N_preserved_comps):
-                        for m in range(inp.Nscales):
-                            for j in range(Nfreqs):
-                                bispectra[p,n,i,z,q,m,j] = results[ct]
-                                ct += 1
+    results = np.array(results, dtype=np.float32)
+    bispectra = np.reshape(results, (N_preserved_comps, inp.Nscales, Nfreqs, N_comps, N_preserved_comps, inp.Nscales, Nfreqs, \
+                                     inp.ellmax+1, inp.ell_sum_max+1, inp.ell_sum_max+1))
+
     return bispectra
 
 def get_rho(inp, CMB_map, tSZ_map, CMB_wt_maps, tSZ_wt_maps):
@@ -255,7 +244,6 @@ def get_rho(inp, CMB_map, tSZ_map, CMB_wt_maps, tSZ_wt_maps):
     comp_maps = [CMB_map, tSZ_map]
     wt_maps = [CMB_wt_maps, tSZ_wt_maps]
     args = []
-    Rho = np.zeros((N_comps, N_preserved_comps, inp.Nscales, Nfreqs, N_preserved_comps, inp.Nscales, Nfreqs, inp.ell_sum_max+1, inp.ell_sum_max+1, inp.ell_sum_max+1, inp.ell_sum_max+1, inp.ellmax+1), dtype=np.float32)
     for z in range(N_comps):
         for p in range(N_preserved_comps):
             for n in range(inp.Nscales):
@@ -270,14 +258,8 @@ def get_rho(inp, CMB_map, tSZ_map, CMB_wt_maps, tSZ_wt_maps):
     results = pool.starmap(rho, args)
     pool.close()
 
-    ct = 0
-    for z in range(N_comps):
-        for p in range(N_preserved_comps):
-            for n in range(inp.Nscales):
-                for i in range(Nfreqs):
-                    for q in range(N_preserved_comps):
-                        for m in range(inp.Nscales):
-                            for j in range(Nfreqs):
-                                    Rho[z,p,n,i,q,m,j] = results[ct]
-                                    ct += 1
+    results = np.array(results, dtype=np.float32)
+    Rho = np.reshape(results, (N_comps, N_preserved_comps, inp.Nscales, Nfreqs, N_preserved_comps, inp.Nscales, Nfreqs, \
+                               inp.ell_sum_max+1, inp.ell_sum_max+1, inp.ell_sum_max+1, inp.ell_sum_max+1, inp.ellmax+1))
+
     return Rho

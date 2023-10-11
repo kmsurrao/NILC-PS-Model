@@ -1,3 +1,5 @@
+plots/
 __pycache__
 *~
 *ipynb_checkpoints*
+example_yaml_files/laptop.yaml
