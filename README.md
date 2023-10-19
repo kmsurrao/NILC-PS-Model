@@ -10,6 +10,8 @@ Computation of power spectra of NILC component-separated maps, using n-point fun
 ## Running      
 ```python main.py --config=example_yaml_files/[FILENAME].yaml```  
 
+Various files are saved when running the main pipeline. The Jupyter Notebook [plotting_examples.ipynb](plotting_examples.ipynb) can then be used to construct relevant plots.  
+
 ## Dependencies
 python >= 3.7  
 pywigxjpf    
