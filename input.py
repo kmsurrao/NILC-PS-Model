@@ -37,6 +37,7 @@ class Info(object):
         assert self.ell_sum_max <= 3*self.nside-1, "ell_sum_max must be less than 3*nside-1"
 
         self.freqs = p['freqs']
+        assert len(self.freqs) == 2, "Currently only two frequency channels are supported"
         self.Nscales = p['Nscales']
         assert type(self.Nscales) is int and self.Nscales > 0, "Nscales"
         self.GN_FWHM_arcmin = p['GN_FWHM_arcmin']

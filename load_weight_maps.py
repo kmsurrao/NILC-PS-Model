@@ -9,9 +9,9 @@ def load_wt_maps(inp, band_limit=False):
     
     RETURNS
     --------
-    CMB_wt_maps: (Nscales, Nfreqs=2, npix (variable for each scale and freq)) nested list,
+    CMB_wt_maps: (Nscales, Nfreqs=2, Npix (variable for each scale and freq)) nested list,
                 contains NILC weight maps for preserved CMB
-    tSZ_wt_maps: (Nscales, Nfreqs=2, npix (variable for each scale and freq)) nested list,
+    tSZ_wt_maps: (Nscales, Nfreqs=2, Npix (variable for each scale and freq)) nested list,
                 contains NILC weight maps for preserved tSZ
 
     '''
