@@ -73,19 +73,19 @@ def get_data_vectors(inp, env):
     bispectrum_zzw = get_bispectrum_zzw(inp, CMB_map, tSZ_map, CMB_wt_maps, tSZ_wt_maps)
     if inp.verbose:
         print('calculated bispectra for map, map, weight map', flush=True)
-    pickle.dump(bispectrum_zzw, open(f'{inp.output_dir}/n_point_funcs/bispectrum_zzw.p', 'wb'))
+    pickle.dump(bispectrum_zzw, open(f'{inp.output_dir}/n_point_funcs/bispectrum_zzw.p', 'wb'), protocol=4)
     
     # get bispectrum for two weight maps and one factor of map, index as bispectrum_wzw[p,n,i,z,q,m,j,l1,l2,l3]
     bispectrum_wzw = get_bispectrum_wzw(inp, CMB_map, tSZ_map, CMB_wt_maps, tSZ_wt_maps)
     if inp.verbose:
         print('calculated bispectra for weight map, map, weight map', flush=True)
-    pickle.dump(bispectrum_wzw, open(f'{inp.output_dir}/n_point_funcs/bispectrum_wzw.p', 'wb'))
+    pickle.dump(bispectrum_wzw, open(f'{inp.output_dir}/n_point_funcs/bispectrum_wzw.p', 'wb'), protocol=4)
     
     # get unnormalized trispectrum estimator rho, index as rho[z,p,n,i,q,m,j,l2,l4,l3,l5,l1]
     Rho = get_rho(inp, CMB_map, tSZ_map, CMB_wt_maps, tSZ_wt_maps)
     if inp.verbose:
         print('calculated unnormalized trispectrum estimator rho', flush=True)
-    pickle.dump(Rho, open(f'{inp.output_dir}/n_point_funcs/Rho.p', 'wb'))
+    pickle.dump(Rho, open(f'{inp.output_dir}/n_point_funcs/Rho.p', 'wb'), protocol=4)
         
     #get needlet filters and spectral responses
     h = GaussianNeedlets(inp)[1]

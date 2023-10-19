@@ -26,6 +26,8 @@ def setup_output_dir(inp, env):
         subprocess.call(f'mkdir {inp.output_dir}/pyilc_outputs', shell=True, env=env)
     if not os.path.isdir(f'{inp.output_dir}/n_point_funcs'):
         subprocess.call(f'mkdir {inp.output_dir}/n_point_funcs', shell=True, env=env)
+    if not os.path.isdir(f'{inp.output_dir}/data_vecs'):
+        subprocess.call(f'mkdir {inp.output_dir}/data_vecs', shell=True, env=env)
 
     return 
 
