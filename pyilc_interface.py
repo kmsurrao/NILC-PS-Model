@@ -37,6 +37,7 @@ def setup_pyilc(inp, env, suppress_printing=False):
     pyilc_input_params['N_deproj'] = 0
     pyilc_input_params['N_SED_params'] = 0
     pyilc_input_params['N_maps_xcorr'] = 0
+    pyilc_input_params['save_as'] = 'fits'
     pyilc_input_params['freq_map_files'] = [f'{inp.output_dir}/maps/freq1.fits', f'{inp.output_dir}/maps/freq2.fits']
     pyilc_input_params_preserved_cmb = {'ILC_preserved_comp': 'CMB'}
     pyilc_input_params_preserved_tsz = {'ILC_preserved_comp': 'tSZ'}
